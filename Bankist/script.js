@@ -31,7 +31,29 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
-
+//Implement smooth scrolling to learn more buttons
 btnShowMore.addEventListener('click', function () {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+//Implement smooth scrolling to links
+
+//old way with node list
+
+// document.querySelectorAll('.nav__link').forEach(link =>
+//   link.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     let hrefAtribut = link.getAttribute('href');
+//     document.querySelector(hrefAtribut).scrollIntoView({ behavior: 'smooth' });
+//   })
+// );
+
+//better way with event delegation
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    let hrefAtribut = e.target.getAttribute('href');
+    document.querySelector(hrefAtribut).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
