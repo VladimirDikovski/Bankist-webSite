@@ -9,6 +9,14 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnShowMore = document.querySelector('.btn--scroll-to');
 const section1 = document.getElementById('section--1');
+const btnOpen = document.querySelector('.drop-down');
+const headerEl = document.querySelector('.header');
+
+//add open and hide menu
+
+btnOpen.addEventListener('click', function () {
+  headerEl.classList.toggle('open');
+});
 
 const openModal = function (e) {
   e.preventDefault();
