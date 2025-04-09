@@ -177,6 +177,7 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .header__title {
@@ -672,3 +673,19 @@ h4 {
   font-size: 1.5rem;
   font-weight: 400;
 }
+
+.drop-down {
+  border: none;
+  background: none;
+}
+.menu-btn {
+  font-size: 3.4rem;
+  color: #333;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  right: 50%;
+  top: 30px;
+  left: 50%;
+}
+
