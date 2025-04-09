@@ -11,6 +11,12 @@ const btnShowMore = document.querySelector('.btn--scroll-to');
 const section1 = document.getElementById('section--1');
 const btnOpen = document.querySelector('.drop-down');
 const headerEl = document.querySelector('.header');
+const buttonContainer = document.querySelector('.operations__tab-container');
+const buttonsAraysEl = document.querySelectorAll('.btn');
+const operationContensArrays = document.querySelectorAll(
+  '.operations__content'
+);
+const operationsEl = document.querySelector('.operations');
 
 //add open and hide menu
 
@@ -63,5 +69,24 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     let hrefAtribut = e.target.getAttribute('href');
     document.querySelector(hrefAtribut).scrollIntoView({ behavior: 'smooth' });
   }
+});
+
+// tabbed component
+
+buttonContainer.addEventListener('click', function (e) {
+  const currentElement = e.target.closest('.btn');
+
+  if (!currentElement) return;
+  //remove classes
+  buttonsAraysEl.forEach(b => b.classList.remove('operations__tab--active'));
+  operationContensArrays.forEach(op =>
+    op.classList.remove('operations__content--active')
+  );
+  //add class
+  currentElement.classList.add('operations__tab--active');
+
+  document
+    .querySelector(`.operations__content--${currentElement.dataset.tab}`)
+    .classList.add('operations__content--active');
 });
 
