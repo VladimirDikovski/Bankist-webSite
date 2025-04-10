@@ -170,3 +170,24 @@ const headerObserved = new IntersectionObserver(stickyNav, {
 });
 headerObserved.observe(headerEl);
 
+
+//add observe and add hidden class to all sections
+//Reveal efect sections
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+
+const sectionObserved = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allSections.forEach(function (section) {
+  section.classList.add('section--hidden');
+  sectionObserved.observe(section);
+});
+
+
