@@ -190,4 +190,21 @@ allSections.forEach(function (section) {
   sectionObserved.observe(section);
 });
 
+//lazy -img optimization
+
+const lazyImgLoad = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  entry.target.src = entry.target.dataset.src;
+  entry.target.classList.remove('lazy-img');
+  observer.unobserve(entry.target);
+};
+
+const imgObserved = new IntersectionObserver(lazyImgLoad, {
+  root: null,
+  threshold: 0,
+  rootMargin: `${90}px`,
+});
+
+allLazyImages.forEach(img => imgObserved.observe(img));
 
