@@ -1,3 +1,4 @@
+
 "use strict";
 
 ///////////////////////////////////////
@@ -229,6 +230,7 @@ sliders.forEach((s, i) => (s.style.transform = `translateX(${i * 100}%)`));
 //implement click event to right button
 
 const nextSlide = function () {
+  console.log(counterClicks);
   if (counterClicks === slidersLenght - 1) {
     counterClicks = 0;
   } else {
@@ -240,7 +242,9 @@ const nextSlide = function () {
   );
 };
 
+//implement click event to left button
 const previousSlide = function () {
+  console.log(counterClicks);
   if (counterClicks * -1 === slidersLenght) {
     counterClicks = -1;
   } else {
@@ -253,7 +257,6 @@ const previousSlide = function () {
         100 * (slidersLenght - i + counterClicks) * -1
       }%)`)
   );
-  console.log(counterClicks);
 };
 
 btnRight.addEventListener("click", nextSlide);
@@ -265,5 +268,31 @@ document.addEventListener("keydown", function (e) {
   }
   if (e.key === "ArrowLeft") {
     previousSlide();
+  }
+});
+
+//dots
+
+const dotsContainer = document.querySelector(".dots");
+
+//create dots elements
+
+sliders.forEach(function (_, i) {
+  dotsContainer.insertAdjacentHTML(
+    "beforeend",
+    `<button class="dots__dot" data-slide="${i}"></button>`
+  );
+});
+
+const dotsElements = document.querySelectorAll(".dots__dot");
+dotsContainer.addEventListener("click", function (e) {
+  dotsElements.forEach((d) => d.classList.remove("dots__dot--active"));
+  if (e.target.classList.contains("dots__dot")) {
+    e.target.classList.add("dots__dot--active");
+    const dataAtribute = Number(e.target.dataset.slide);
+    let arraySliders = [...sliders];
+    sliders.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - dataAtribute)}%)`)
+    );
   }
 });
